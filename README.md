@@ -70,13 +70,13 @@ distancePhrase(int mm)
 
 - Converts millimeters to a spoken phrase, scaled by the user's configured armLen:
 
- Multiple of arm length	Phrase
- 0.4	"right in front of you"
-0.4 – 0.8	"half an arm's length"
-0.8 – 1.2	"about an arm's length"
-1.2 – 2.0	"just out of reach"
-2.0 – 4.0	"a couple of steps away"
- 4.0	feet, rounded to the nearest 2
+  
+- < 0.4 Multiple of arm length:"right in front of you"
+- 0.4 – 0.8 multiple of arm length:"half an arm's length"
+- 0.8 – 1.2	multiple of arm length:"about an arm's length"
+- 1.2 – 2.0	multiple of arm length:"just out of reach"
+- 2.0 – 4.0	multiple of arm length:"a couple of steps away"
+- greater then 4.0 multiple of arm length: feet, rounded to the nearest 2
  
 - The depth measurement is good to roughly ±5 cm. Returns "distance unknown" when depth was unavailable. Called by detect(). Depends on the armLen field, set by launchArmLengthDialog().
 
@@ -89,6 +89,7 @@ speak(String s)
 
 -Thin wrapper over TextToSpeech.speak() using QUEUE_FLUSH, so a new announcement replaces anything still speaking rather than queuing behind it.
 Returns silently if TTS hasn't finished initializing. Called from detect() on the GL thread and from launchArmLengthDialog() on the main thread.
+
 initOrt()
 - Lazily creates the OrtEnvironment and OrtSession from the bundled .onnx asset, and caches the input tensor name. Called from onResume() and defensively from detect().
   
